@@ -10,6 +10,9 @@ on:
       - "v*.*.*"
   pull_request:
 
+env:
+  SECRETS_ARE_AVAILABLE: ${{ secrets.SECRETS_ARE_AVAILABLE }}
+
 jobs:
   # Build, Test and Push Docker image
   tests:
@@ -26,7 +29,7 @@ jobs:
           images: ${{ github.repository }}/test_image
       # Push Dokcer image
       - name: Push Docker image
-        #if: ${{secrets.DOCKERHUB_USER}} != null
+        if: ${{ env.SECRETS_ARE_AVAILABLE }}
         run: |
           echo ${{ github.base_ref }}
           echo ${{ github.ref }}
