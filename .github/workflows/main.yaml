@@ -23,7 +23,7 @@ jobs:
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: ${GITHUB_REPOSITORY}/test_image
+          images: ${{ env.GITHUB_REPOSITORY }}/test_image
       # Push Dokcer image
       - name: Push Docker image
         run: |
