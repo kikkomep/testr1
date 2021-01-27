@@ -29,6 +29,8 @@ jobs:
         #if: ${{secrets.DOCKERHUB_USER}} != null
         run: |
           echo ${{ github.ref }}
+          echo ${{ github.head_ref }}
+          echo ${{ github.event_name }}
           echo ${{ secrets.DOCKERHUB_USER }}
           for t in ${{ steps.docker_meta.outputs.tags }}; do
             echo ${t}
