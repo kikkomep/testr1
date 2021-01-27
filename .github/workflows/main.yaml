@@ -28,6 +28,7 @@ jobs:
       - name: Push Docker image
         #if: ${{secrets.DOCKERHUB_USER}} != null
         run: |
+          echo ${{ github.base_ref }}
           echo ${{ github.ref }}
           echo ${{ github.head_ref }}
           echo ${{ github.event_name }}
