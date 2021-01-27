@@ -23,6 +23,11 @@ jobs:
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: kikkomep/test_image
-      
+          images: ${GITHUB_REPOSITORY}/test_image
+      # Push Dokcer image
+      - name: Push Docker image
+        run: |
+          for t in ${{ steps.docker_meta.outputs.tags }}; do
+            echo ${t}
+          done
       
