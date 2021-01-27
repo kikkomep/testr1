@@ -26,6 +26,7 @@ jobs:
           images: ${{ github.repository }}/test_image
       # Push Dokcer image
       - name: Push Docker image
+        if: ${{ secrets.DOCKERHUB_USER != null }}
         run: |
           echo ${{ secrets.DOCKERHUB_USER }}
           for t in ${{ steps.docker_meta.outputs.tags }}; do
