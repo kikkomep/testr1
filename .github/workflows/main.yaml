@@ -24,15 +24,13 @@ jobs:
       - name: Set env
         run: echo "IMG=$( if [[ -n $SECRET_IMG ]]; then echo $SECRET_IMG; else echo $GITHUB_REPOSITORY; fi )" >> $GITHUB_ENV
         env:
-          SECRET_IMG: ''
+          SECRET_IMG: 'test'
       # Extract Docker metadata
       - name: Set up Docker metadata
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: ${{ env.IMG }}/image
-        env:
-          IMG: test
+          images: ${{ env.IMG }}/image        
       # Push Dokcer image
       - name: Push Docker image
         if: ${{ env.SECRETS_ARE_AVAILABLE == 'true' }}
