@@ -35,11 +35,13 @@ jobs:
       - name: Push Docker image
         if: ${{ env.SECRETS_ARE_AVAILABLE == 'true' }}
         run: |
+          
           echo ${{ github.base_ref }}
           echo ${{ github.ref }}
           echo ${{ github.head_ref }}
           echo ${{ github.event_name }}
           echo ${{ secrets.DOCKERHUB_USER }}
+          echo $labels
           for t in $labels; do
             echo "- ${t}"
           done
