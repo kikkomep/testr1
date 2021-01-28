@@ -31,6 +31,8 @@ jobs:
         uses: crazy-max/ghaction-docker-meta@v1
         with:
           images: ${{ env.IMG }}/image
+        env:
+          IMG: test
       # Push Dokcer image
       - name: Push Docker image
         if: ${{ env.SECRETS_ARE_AVAILABLE == 'true' }}
