@@ -40,7 +40,9 @@ jobs:
           echo ${{ github.head_ref }}
           echo ${{ github.event_name }}
           echo ${{ secrets.DOCKERHUB_USER }}
-          for t in "${{ steps.docker_meta.outputs.labels }}"; do
+          for t in $labels; do
             echo "- ${t}"
           done
+        env:
+          labels: ${{ steps.docker_meta.outputs.labels }}
       
