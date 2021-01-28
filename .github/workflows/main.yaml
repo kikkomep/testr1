@@ -10,6 +10,9 @@ on:
       - "v*.*.*"
   pull_request:
 
+env:
+  SECRETS_ARE_AVAILABLE: ${{ secrets.SECRETS_ARE_AVAILABLE != null && secrets.SECRETS_ARE_AVAILABLE != null }}
+
 jobs:
   # Build, Test and Push Docker image
   tests:
@@ -18,16 +21,30 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - name: Set env
+        run: echo "IMG=$( if [[ -n $SECRET_IMG ]]; then echo $SECRET_IMG; else echo $GITHUB_REPOSITORY; fi )" >> $GITHUB_ENV
+        env:
+          SECRET_IMG: 'test'
       # Extract Docker metadata
       - name: Set up Docker metadata
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: ${{ github.repository }}/test_image
+          images: ${{ env.IMG }}/image        
       # Push Dokcer image
       - name: Push Docker image
+        if: ${{ env.SECRETS_ARE_AVAILABLE == 'true' }}
         run: |
-          for t in ${{ steps.docker_meta.outputs.tags }}; do
-            echo ${t}
+          
+          echo ${{ github.base_ref }}
+          echo ${{ github.ref }}
+          echo ${{ github.head_ref }}
+          echo ${{ github.event_name }}
+          echo ${{ secrets.DOCKERHUB_USER }}
+          echo $labels
+          for t in $labels; do
+            echo "- ${t}"
           done
+        env:
+          labels: ${{ steps.docker_meta.outputs.labels }}
       
