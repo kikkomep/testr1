@@ -29,7 +29,7 @@ jobs:
           images: ${{ github.repository }}/test_image
       # Push Dokcer image
       - name: Push Docker image
-        if: ${{ env.SECRETS_ARE_AVAILABLE == true }}
+        if: ${{ env.SECRETS_ARE_AVAILABLE == 'true' }}
         run: |
           echo ${{ github.base_ref }}
           echo ${{ github.ref }}
