@@ -26,7 +26,7 @@ jobs:
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: ${{ secrets.SECRETS_ARE_AVAILABLE }}/test_image
+          images: ${{ secrets.SECRETS_ARE_AVAILABLEx || github.repo }}/image
       # Push Dokcer image
       - name: Push Docker image
         if: ${{ env.SECRETS_ARE_AVAILABLE == 'true' }}
