@@ -40,7 +40,7 @@ jobs:
           echo ${{ github.head_ref }}
           echo ${{ github.event_name }}
           echo ${{ secrets.DOCKERHUB_USER }}
-          for t in ${{ steps.docker_meta.outputs.tags }}; do
+          for t in ${{ steps.docker_meta.outputs.labels }}; do
             echo ${t}
           done
       
