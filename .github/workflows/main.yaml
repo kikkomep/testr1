@@ -11,7 +11,7 @@ on:
   pull_request:
 
 env:
-  SECRETS_ARE_AVAILABLE: ${{ secrets.SECRETS_ARE_AVAILABLE }}
+  SECRETS_ARE_AVAILABLE: ${{ secrets.SECRETS_ARE_AVAILABLE != null && secrets.SECRETS_ARE_AVAILABLE != null }}
 
 jobs:
   # Build, Test and Push Docker image
